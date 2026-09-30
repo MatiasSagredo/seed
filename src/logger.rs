@@ -51,7 +51,7 @@ impl Log for SeedLogger {
     }
     fn log(&self, record: &log::Record) {
         let level_str = record.level().as_str().to_uppercase();
-        let target_str = record.target();
+        let target_str = record.target().to_uppercase();
         let args = record.args();
         #[cfg(debug_assertions)]
         {
