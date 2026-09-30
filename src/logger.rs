@@ -16,6 +16,12 @@ struct SeedLogger;
 
 static LOGGER: SeedLogger = SeedLogger;
 
+/// Initializes the logger for SEED.
+/// In debug mode, it will log all messages (trace, debug, info, warn, error).
+/// In release mode, it will log only info, warn, and error messages.
+/// 
+/// # Errors
+/// - Returns [`LoggerError::InitError`] if the logger fails to initialize.
 pub fn init_logger() -> Result<()> {
     if let Err(e) = set_logger(&LOGGER) {
         return Err(LoggerError::InitError(e));
