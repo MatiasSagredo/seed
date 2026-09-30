@@ -15,6 +15,7 @@ name = "seed"
 test = false
 
 [dependencies]
+log = { version = "0.4.34", features = ["alloc", "std"] }
 owo-colors = { version = "4.4.0", features = ["alloc", "supports-colors"] }
 
 [lints.clippy]
