@@ -1,3 +1,7 @@
 #![doc = include_str!("../README.md")]
 
-fn main() {}
+use seed::print_header;
+
+fn main() {
+    print_header();
+}
