@@ -1,14 +1,25 @@
-use log::set_logger;
+use log::{SetLoggerError, set_logger};
 #[cfg(debug_assertions)]
 use log::{Level, Log};
 use owo_colors::OwoColorize;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum LoggerError {
+    #[error("Error while initializing the logger: {0}")]
+    InitError(SetLoggerError)
+}
+
+type Result<T> = core::result::Result<T, LoggerError>;
 
 struct SeedLogger;
 
 static LOGGER: SeedLogger = SeedLogger;
 
-pub fn init_logger() {
-    set_logger(&LOGGER).unwrap();
+pub fn init_logger() -> Result<()> {
+    if let Err(e) = set_logger(&LOGGER) {
+        return Err(LoggerError::InitError(e));
+    }
     #[cfg(debug_assertions)]
     {
         log::set_max_level(log::LevelFilter::Trace);
@@ -17,6 +28,7 @@ pub fn init_logger() {
     {
         log::set_max_level(log::LevelFilter::Info);
     }
+    Ok(())
 }
 
 impl Log for SeedLogger {
