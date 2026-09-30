@@ -1,0 +1,64 @@
+[package]
+name = "seed"
+version = "0.1.0"
+edition = "2024"
+description = "todo"
+license = "MIT"
+categories = ["command-line-utilities"]
+publish = false
+resolver = "3"
+
+[[bin]]
+doc = false
+doctest = false
+name = "seed"
+test = false
+
+[lints.clippy]
+alloc_instead_of_core = "warn"
+allow_attributes = "deny"
+allow_attributes_without_reason = "warn"
+complexity = { level = "warn", priority = -1 }
+correctness = { level = "deny", priority = -1 }
+missing_errors_doc = "warn"
+missing_panics_doc = "warn"
+missing_safety_doc = "warn"
+must_use_candidate = "warn"
+perf = { level = "warn", priority = -1 }
+return_self_not_must_use = "warn"
+std_instead_of_alloc = "warn"
+std_instead_of_core = "warn"
+use_self = "warn"
+
+[lints.rust]
+irrefutable_let_patterns = "warn"
+missing_copy_implementations = "warn"
+missing_debug_implementations = "warn"
+missing_docs = "warn"
+unused = { level = "warn", priority = -1 }
+variant_size_differences = "warn"
+
+[lints.rustdoc]
+private_doc_tests = "warn"
+unescaped_backticks = "warn"
+
+[profile.dev]
+opt-level = 0
+debug = "full"
+strip = "none"
+debug-assertions = true
+overflow-checks = true
+lto = "off"
+panic = "unwind"
+incremental = true
+codegen-units = 256
+
+[profile.release]
+debug = "none"
+strip = "debuginfo"
+debug-assertions = false
+overflow-checks = false
+lto = "fat"
+panic = "abort"
+incremental = false
+codegen-units = 1
