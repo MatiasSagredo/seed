@@ -1,5 +1,4 @@
 use log::{SetLoggerError, set_logger};
-#[cfg(debug_assertions)]
 use log::{Level, Log};
 use owo_colors::OwoColorize;
 use thiserror::Error;
