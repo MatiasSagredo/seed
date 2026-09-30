@@ -63,28 +63,28 @@ impl Log for SeedLogger {
                     level_str.dimmed(),
                     target_str.dimmed(),
                     fileline.dimmed(),
-                    args.dimmed()
+                    args
                 ),
                 Level::Info => format_args!(
                     "[{}][{}] {}: {}",
                     level_str.cyan(),
                     target_str.white(),
                     fileline.dimmed(),
-                    args.cyan()
+                    args
                 ),
                 Level::Warn => format_args!(
                     "[{}][{}] {}: {}",
                     level_str.yellow(),
                     target_str.white(),
                     fileline.dimmed(),
-                    args.yellow()
+                    args
                 ),
                 Level::Error => format_args!(
                     "[{}][{}] {}: {}",
                     level_str.red(),
                     target_str.white(),
                     fileline.dimmed(),
-                    args.red()
+                    args
                 ),
             };
 
@@ -100,25 +100,25 @@ impl Log for SeedLogger {
                     "[{}][{}]: {}",
                     level_str.dimmed(),
                     target_str.dimmed(),
-                    args.dimmed()
+                    args
                 ),
                 Level::Info => format_args!(
                     "[{}][{}]: {}",
                     level_str.cyan(),
                     target_str.white(),
-                    args.cyan()
+                    args
                 ),
                 Level::Warn => format_args!(
                     "[{}][{}]: {}",
                     level_str.yellow(),
                     target_str.white(),
-                    args.yellow()
+                    args
                 ),
                 Level::Error => format_args!(
                     "[{}][{}]: {}",
                     level_str.red(),
                     target_str.white(),
-                    args.red()
+                    args
                 ),
             };
             match record.level() {
