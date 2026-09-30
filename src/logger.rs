@@ -1,5 +1,6 @@
 use log::{SetLoggerError, set_logger};
 use log::{Level, Log};
+use chrono::Local;
 use owo_colors::OwoColorize;
 use thiserror::Error;
 
@@ -49,6 +50,7 @@ impl Log for SeedLogger {
         }
     }
     fn log(&self, record: &log::Record) {
+        let time = Local::now().format("%Y/%m/%d %H:%M:%S");
         let level_str = record.level().as_str().to_uppercase();
         let target_str = record.target().to_uppercase();
         let args = record.args();
@@ -59,28 +61,32 @@ impl Log for SeedLogger {
             let fileline = format_args!("{}:{}", file, line);
             let msg = match record.level() {
                 Level::Trace | Level::Debug => format_args!(
-                    "[{}][{}] {}: {}",
+                    "[{}][{}][{}] {}: {}",
+                    time,
                     level_str.dimmed(),
                     target_str.dimmed(),
                     fileline.dimmed(),
                     args
                 ),
                 Level::Info => format_args!(
-                    "[{}][{}] {}: {}",
+                    "[{}][{}][{}] {}: {}",
+                    time,
                     level_str.cyan(),
                     target_str.white(),
                     fileline.dimmed(),
                     args
                 ),
                 Level::Warn => format_args!(
-                    "[{}][{}] {}: {}",
+                    "[{}][{}][{}] {}: {}",
+                    time,
                     level_str.yellow(),
                     target_str.white(),
                     fileline.dimmed(),
                     args
                 ),
                 Level::Error => format_args!(
-                    "[{}][{}] {}: {}",
+                    "[{}][{}][{}] {}: {}",
+                    time,
                     level_str.red(),
                     target_str.white(),
                     fileline.dimmed(),
@@ -97,25 +103,29 @@ impl Log for SeedLogger {
         {
             let msg = match record.level() {
                 Level::Trace | Level::Debug => format_args!(
-                    "[{}][{}]: {}",
+                    "[{}][{}][{}]: {}",
+                    time,
                     level_str.dimmed(),
                     target_str.dimmed(),
                     args
                 ),
                 Level::Info => format_args!(
-                    "[{}][{}]: {}",
+                    "[{}][{}][{}]: {}",
+                    time,
                     level_str.cyan(),
                     target_str.white(),
                     args
                 ),
                 Level::Warn => format_args!(
-                    "[{}][{}]: {}",
+                    "[{}][{}][{}]: {}",
+                    time,
                     level_str.yellow(),
                     target_str.white(),
                     args
                 ),
                 Level::Error => format_args!(
-                    "[{}][{}]: {}",
+                    "[{}][{}][{}]: {}",
+                    time,
                     level_str.red(),
                     target_str.white(),
                     args
